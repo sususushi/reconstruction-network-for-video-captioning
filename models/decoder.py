@@ -21,6 +21,13 @@ class Decoder(nn.Module):
 
         self.embedding = nn.Embedding(self.output_size, self.embedding_size)
         self.embedding_dropout = nn.Dropout(self.embedding_dropout_p)
+        
+         # word embedding的定义可以这么理解，例如nn.Embedding(2, 4)
+         # 2表示有2个词，4表示4维度，其实也就是一个2x4的矩阵，
+         # 如果有100个词，每个词10维，就可以写为nn.Embedding(100, 10)
+         # 注意这里的词向量的建立只是初始的词向量，并没有经过任何修改优化
+         # 需要建立神经网络通过learning的办法修改word embedding里面的参数
+         # 使得word embedding每一个词向量能够表示每一个不同的词。
 
         self.attn_W = nn.Linear(self.hidden_size, self.attn_size, bias=False)
         self.attn_U = nn.Linear(self.encoder_size, self.attn_size, bias=False)
